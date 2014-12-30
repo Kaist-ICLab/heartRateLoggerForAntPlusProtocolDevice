@@ -16,7 +16,8 @@ import org.cowboycoders.ant.messages.data.BroadcastDataMessage;
 
 public class HeartRateMonitor {
 
-	private static class Listener implements BroadcastListener<BroadcastDataMessage> {
+	private static class Listener implements
+			BroadcastListener<BroadcastDataMessage> {
 
 		private String id;
 
@@ -68,11 +69,13 @@ public class HeartRateMonitor {
 	public void run() {
 		List<Channel> channels = new ArrayList<Channel>();
 
-		Channel motorolaChannel = createHeartRateMeasuringDeviceChannel(1, 22117, "MOTOROLA");
+		Channel motorolaChannel = createHeartRateMeasuringDeviceChannel(1,
+				22117, "MOTOROLA");
 		channels.add(motorolaChannel);
 		motorolaChannel.open();
 
-		Channel mioLinkChannel = createHeartRateMeasuringDeviceChannel(1, 35714, "MIO Link");
+		Channel mioLinkChannel = createHeartRateMeasuringDeviceChannel(1,
+				35714, "MIO Link");
 		channels.add(mioLinkChannel);
 		mioLinkChannel.open();
 
@@ -90,12 +93,14 @@ public class HeartRateMonitor {
 		return node;
 	}
 
-	private Channel createHeartRateMeasuringDeviceChannel(int transmissionType, int id, String nameOfDevice) {
+	private Channel createHeartRateMeasuringDeviceChannel(int transmissionType,
+			int id, String nameOfDevice) {
 		Channel channel = getNode().getFreeChannel();
 		channel.setName(nameOfDevice);
 		ChannelType channelType = new SlaveChannelType();
 		channel.assign(NetworkKeys.ANT_SPORT, channelType);
-		channel.registerRxListener(new Listener(nameOfDevice), BroadcastDataMessage.class);
+		channel.registerRxListener(new Listener(nameOfDevice),
+				BroadcastDataMessage.class);
 		channel.setId(id, HRM_DEVICE_TYPE, transmissionType, HRM_PAIRING_FLAG);
 		channel.setFrequency(HRM_CHANNEL_FREQ);
 		channel.setPeriod(HRM_CHANNEL_PERIOD);
