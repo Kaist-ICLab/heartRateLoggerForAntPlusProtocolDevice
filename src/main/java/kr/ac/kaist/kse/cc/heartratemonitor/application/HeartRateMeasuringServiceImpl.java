@@ -31,17 +31,20 @@ public class HeartRateMeasuringServiceImpl implements HeartRateMeasuringService 
 		}
 
 		public void receiveMessage(BroadcastDataMessage message) {
-
-			String output = "" + id;
+			System.out.print(id + "," + System.currentTimeMillis() + ",");
+			String csvOutput = "";
 			for (int b : message.getUnsignedData()) {
 				String value = "";
 				if (b < 10)
 					value = "__";
 				else if (b < 100)
 					value = "_";
-				output += ("[" + value + b + "]");
+				csvOutput += "," + b;
+				System.out.print("[" + value + b + "]");
 			}
-			log.info(System.currentTimeMillis() + ":" + output);
+			System.out.println();
+
+			log.info(csvOutput);
 		}
 	}
 
@@ -88,22 +91,19 @@ public class HeartRateMeasuringServiceImpl implements HeartRateMeasuringService 
 		if (isRunning) {
 			getNode().stop();
 			isRunning = false;
-			log.info("stop");
 		}
 	}
 
 	public void start() {
 		channel = createHeartRateMeasuringDeviceChannel(1, 35714, "MIO Link");
 		channel.open();
+		isRunning = true;
 		Thread t = new Thread(new Runnable() {
-
 			public void run() {
-				isRunning = true;
 				while (isRunning)
 					;
 			}
 		});
 		t.start();
-		log.info("start");
 	}
 }
