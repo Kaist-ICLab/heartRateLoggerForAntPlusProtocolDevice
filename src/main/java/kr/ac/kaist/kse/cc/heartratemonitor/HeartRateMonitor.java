@@ -69,10 +69,10 @@ public class HeartRateMonitor {
 	public void run() {
 		List<Channel> channels = new ArrayList<Channel>();
 
-		Channel motorolaChannel = createHeartRateMeasuringDeviceChannel(1,
+		/*Channel motorolaChannel = createHeartRateMeasuringDeviceChannel(1,
 				22117, "MOTOROLA");
 		channels.add(motorolaChannel);
-		motorolaChannel.open();
+		motorolaChannel.open();*/
 
 		Channel mioLinkChannel = createHeartRateMeasuringDeviceChannel(1,
 				35714, "MIO Link");
@@ -82,7 +82,7 @@ public class HeartRateMonitor {
 		while (working)
 			;
 
-		getNode().freeChannel(motorolaChannel);
+		//getNode().freeChannel(motorolaChannel);
 		getNode().freeChannel(mioLinkChannel);
 
 		getNode().stop();
