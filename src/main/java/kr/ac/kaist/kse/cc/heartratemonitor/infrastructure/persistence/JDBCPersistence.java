@@ -8,7 +8,7 @@ abstract class JDBCPersistence {
 
 	private final static String DB_SERVER_ID = "root";
 	private final static String DB_SERVER_PW = "kimjw1100";
-	private final static String DB_SERVER_URL = "jdbc:mysql://143.248.90.196:3306/yh.hong_lectureplayer?characterEncoding=euckr";
+	private final static String DB_SERVER_URL = "jdbc:mysql://143.248.90.196:3306/kimauk_lectureplayer?characterEncoding=euckr";
 
 	private static Connection connection = null;
 

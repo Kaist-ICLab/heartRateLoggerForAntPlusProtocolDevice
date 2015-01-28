@@ -8,10 +8,13 @@ public class HeartRate {
 	private int value;
 	private long time;
 
-	public HeartRate(String name, int value, long time) {
+	public HeartRate(String name) {
 		this.name = name;
+	}
+	
+	public void setValue(int value){
 		this.value = value;
-		this.time = time;
+		this.time = System.currentTimeMillis();
 	}
 
 	public String getName() {
